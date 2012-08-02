@@ -29,6 +29,6 @@ Vagrant::Config.run do |config|
     config.vm.define :keysigner do |key_config|
         key_config.vm.provision :puppet, :module_path => "bid_modules/keysigner"
         key_config.vm.host_name = "keysigner1.dev"
-        key_config.vm.network :hostonly, "10.10.10.115"
+        key_config.vm.network :hostonly, "10.10.10.116"
     end
 end
