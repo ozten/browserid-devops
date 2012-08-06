@@ -1,34 +1,52 @@
-# we could offload this to a yaml file like kuma or mozillians do it;
-# hard-coding for now. the port forwarding may be particularly wrong.
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
 
 Vagrant::Config.run do |config|
-    # defaults for all VMs
-    config.vm.box = "scilinux"
-    config.vm.box_url = "http://dl.dropbox.com/u/95681659/scilinux.box"
+  config.vm.box = "myscilinux"
 
-    config.vm.define :web do |web_config|
-        web_config.vm.provision :puppet, :module_path => "bid_modules/web"
-        web_config.vm.forward_port 80, 8080
-        web_config.vm.host_name = "web1.dev"
-        web_config.vm.network :hostonly, "10.10.10.110"
-    end
+  config.vm.box_url = "http://download.frameos.org/sl6-64-chefclient-0.10.box"
 
-    config.vm.define :db do |db_config|
-        db_config.vm.provision :puppet, :module_path => "bid_modules/db"
-        db_config.vm.forward_port 3306, 3306
-        db_config.vm.host_name = "db1.dev"
-        db_config.vm.network :hostonly, "10.10.10.120"
-    end
+  # config.vm.boot_mode = :gui
 
-    config.vm.define :dbwriter do |dbw_config|
-        dbw_config.vm.provision :puppet, :module_path => "bid_modules/dbwriter"
-        dbw_config.vm.host_name = "dbwriter1.dev"
-        dbw_config.vm.network :hostonly, "10.10.10.115"
-    end
+  # config.vm.network :hostonly, "192.168.33.11"
 
-    config.vm.define :keysigner do |key_config|
-        key_config.vm.provision :puppet, :module_path => "bid_modules/keysigner"
-        key_config.vm.host_name = "keysigner1.dev"
-        key_config.vm.network :hostonly, "10.10.10.116"
-    end
+  # config.vm.forward_port 80, 8080
+
+  config.vm.share_folder "v-puppet", "/etc/puppet", "puppet"
+
+  # Enable provisioning with Puppet stand alone.  Puppet manifests
+  # are contained in a directory path relative to this Vagrantfile.
+  # You will need to create the manifests directory and a manifest in
+  # the file myscilinux.pp in the manifests_path directory.
+  #
+  # An example Puppet manifest to provision the message of the day:
+  #
+  #
+  config.vm.provision :puppet do |puppet|
+     puppet.manifests_path = "puppet/manifests"
+     puppet.manifest_file  = "browserid.pp"
+  end
+
+  # Enable provisioning with chef server, specifying the chef server URL,
+  # and the path to the validation key (relative to this Vagrantfile).
+  #
+  # The Opscode Platform uses HTTPS. Substitute your organization for
+  # ORGNAME in the URL and validation key.
+  #
+  # If you have your own Chef Server, use the appropriate URL, which may be
+  # HTTP instead of HTTPS depending on your configuration. Also change the
+  # validation key to validation.pem.
+  #
+  # config.vm.provision :chef_client do |chef|
+  #   chef.chef_server_url = "https://api.opscode.com/organizations/ORGNAME"
+  #   chef.validation_key_path = "ORGNAME-validator.pem"
+  # end
+  #
+  # If you're using the Opscode platform, your validator client is
+  # ORGNAME-validator, replacing ORGNAME with your organization name.
+  #
+  # IF you have your own Chef Server, the default validation client name is
+  # chef-validator, unless you changed the configuration.
+  #
+  #   chef.validation_client_name = "ORGNAME-validator"
 end
