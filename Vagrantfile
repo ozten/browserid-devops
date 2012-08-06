@@ -2,10 +2,13 @@
 # vi: set ft=ruby :
 
 Vagrant::Config.run do |config|
-  config.vm.box = "myscilinux"
+  config.vm.box = "browserid-scilinux-base0"
+  config.vm.box_url = "http://ozten.com/random/identity/devops/browserid-scilinux-base0.box"
 
+  # Based on
   # config.vm.box_url = "http://download.frameos.org/sl6-64-chefclient-0.10.box"
 
+  # Troubleshooting? use the GUI
   # config.vm.boot_mode = :gui
 
   config.vm.network :hostonly, "192.168.33.11"
