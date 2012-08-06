@@ -39,17 +39,17 @@ package {"openssl": ensure => "present" }
 
 package {"openssl-devel": ensure => "present" }
 
-git clone git://github.com/mozilla/browserid.git
+# git clone git://github.com/mozilla/browserid.git
 
-file {"/service/browserid/run":
-  ensure => "present",
-  source => "puppet:///files/daemontools/browserid/run"
-}
+# file {"/service/browserid/run":
+#  ensure => "present",
+#  source => "puppet:///files/daemontools/browserid/run"
+# }
 
 # This still has some errors
 # Had to pin jwcrypto to 0.3.1 manually before running
-exec { "browserid node dependencies installed":
-  command => "/usr/bin/npm install",
-  cwd => "/vagrant/browserid",
-  user => "browserid"
-}
+#exec { "browserid node dependencies installed":
+#  command => "/usr/bin/npm install",
+#  cwd => "/home/browserid/browserid",
+#  user => "browserid"
+#}
