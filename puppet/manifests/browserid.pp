@@ -27,10 +27,6 @@ package { "git": ensure => "present" }
 
 package { "wget": ensure => "present" }
 
-file {"/service/browserid/supervise":
-  ensure => "directory"
-}
-
 package {"gmp": ensure => "present" }
 
 package {"gmp-devel": ensure => "present" }
@@ -41,15 +37,145 @@ package {"openssl-devel": ensure => "present" }
 
 # git clone git://github.com/mozilla/browserid.git
 
-# file {"/service/browserid/run":
-#  ensure => "present",
-#  source => "puppet:///files/daemontools/browserid/run"
-# }
+exec { "browserid node dependencies installed":
+  command => "/usr/bin/npm install",
+  cwd => "/home/browserid/browserid",
+  user => "browserid"
+}
 
-# This still has some errors
-# Had to pin jwcrypto to 0.3.1 manually before running
-#exec { "browserid node dependencies installed":
-#  command => "/usr/bin/npm install",
-#  cwd => "/home/browserid/browserid",
-#  user => "browserid"
-#}
+file {"/service/browserid-browserid": ensure => "directory" }
+
+# TODO puppet:///files/... instead of /vagarnt/files/...
+# TODO reduce duplicate code with a define
+file {"/service/browserid-browserid/run":
+  ensure => "file",
+  source => "/vagrant/puppet/files/daemontools/browserid-browserid/run",
+  owner => "root",
+  mode => "0755"
+}
+
+file {"/service/browserid-browserid/supervise":
+  ensure => "directory",
+  owner => "root",
+  mode => "0755"
+}
+
+file {"/service/browserid-example": ensure => "directory" }
+
+file {"/service/browserid-example/run":
+  ensure => "file",
+  source => "/vagrant/puppet/files/daemontools/browserid-example/run",
+  owner => "root",
+  mode => "0755"
+}
+
+file {"/service/browserid-example/supervise":
+  ensure => "directory",
+  owner => "root",
+  mode => "0755"
+}
+
+file {"/service/browserid-keysigner": ensure => "directory" }
+
+file {"/service/browserid-keysigner/run":
+  ensure => "file",
+  source => "/vagrant/puppet/files/daemontools/browserid-keysigner/run",
+  owner => "root",
+  mode => "0755"
+}
+
+file {"/service/browserid-keysigner/supervise":
+  ensure => "directory",
+  owner => "root",
+  mode => "0755"
+}
+
+file {"/service/browserid-router": ensure => "directory" }
+
+file {"/service/browserid-router/run":
+  ensure => "file",
+  source => "/vagrant/puppet/files/daemontools/browserid-router/run",
+  owner => "root",
+  mode => "0755"
+}
+
+file {"/service/browserid-router/supervise":
+  ensure => "directory",
+  owner => "root",
+  mode => "0755"
+}
+
+file {"/service/browserid-verifier": ensure => "directory" }
+
+file {"/service/browserid-verifier/run":
+  ensure => "file",
+  source => "/vagrant/puppet/files/daemontools/browserid-verifier/run",
+  owner => "root",
+  mode => "0755"
+}
+
+file {"/service/browserid-verifier/supervise":
+  ensure => "directory",
+  owner => "root",
+  mode => "0755"
+}
+
+file {"/service/browserid-dbwriter": ensure => "directory" }
+
+file {"/service/browserid-dbwriter/run":
+  ensure => "file",
+  source => "/vagrant/puppet/files/daemontools/browserid-dbwriter/run",
+  owner => "root",
+  mode => "0755"
+}
+
+file {"/service/browserid-dbwriter/supervise":
+  ensure => "directory",
+  owner => "root",
+  mode => "0755"
+}
+
+file {"/service/browserid-example-primary": ensure => "directory" }
+
+file {"/service/browserid-example-primary/run":
+  ensure => "file",
+  source => "/vagrant/puppet/files/daemontools/browserid-example-primary/run",
+  owner => "root",
+  mode => "0755"
+}
+
+file {"/service/browserid-example-primary/supervise":
+  ensure => "directory",
+  owner => "root",
+  mode => "0755"
+}
+
+file {"/service/browserid-proxy": ensure => "directory" }
+
+file {"/service/browserid-proxy/run":
+  ensure => "file",
+  source => "/vagrant/puppet/files/daemontools/browserid-proxy/run",
+  owner => "root",
+  mode => "0755"
+}
+
+file {"/service/browserid-proxy/supervise":
+  ensure => "directory",
+  owner => "root",
+  mode => "0755"
+}
+
+file {"/service/browserid-static": ensure => "directory" }
+
+file {"/service/browserid-static/run":
+  ensure => "file",
+  source => "/vagrant/puppet/files/daemontools/browserid-static/run",
+  owner => "root",
+  mode => "0755"
+}
+
+file {"/service/browserid-static/supervise":
+  ensure => "directory",
+  owner => "root",
+  mode => "0755"
+}

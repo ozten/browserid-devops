@@ -9,12 +9,25 @@ A vagrant box with locally running copy of browserid on http://localhost:10001
 Setup ruby, gems, vagrant
 
     vagrant up
-    vagrant ssh
-    sudo su browserid
-    cd /home/browserid/browserid
-    HOST=localhost IP_ADDRESS=0.0.0.0 PUBLIC_URL=http://localhost:10001 npm start
 
 Now you can go to http://localhost:10001/ and click 'Get an assertion'.
+
+BrowserID services are managed by daemontools...
+
+If you need to restart a service, you can do
+
+    vagrant ssh
+    # restart all services
+    sudo svc -t /service/browserid-*
+    # restart a service
+    sudo svc -t /service/browserid-verifier
+
+If you want to tail the logs:
+
+    vagarnt ssh
+    sudo su browserid
+    cd /home/browserid/browserid
+    tail -f var/log/*.log
 
 # Vagrant Tips #
 
@@ -43,6 +56,17 @@ Now you can go to http://localhost:10001/ and click 'Get an assertion'.
 
     vagrant destroy
     vagrant up
+
+# Daemontools Tips
+
+You can detect a service keeps restarting and is hozed by
+
+    sudo /command/svstat  /service/browserid-*
+    # look at how long various services have been running to spot an issue
+
+Last known error message from daemontools
+
+    ps aux | grep readproctitle
 
 # Limitations #
 
