@@ -14,6 +14,8 @@ Setup ruby, gems, vagrant
     cd /home/browserid/browserid
     HOST=localhost IP_ADDRESS=0.0.0.0 PUBLIC_URL=http://localhost:10001 npm start
 
+Now you can go to http://localhost:10001/ and click 'Get an assertion'.
+
 # Vagrant Tips #
 
 `vagrant up` and `vagrant ssh` are very useful, here are some others...
@@ -42,9 +44,10 @@ Setup ruby, gems, vagrant
     vagrant destroy
     vagrant up
 
-
-
 # Limitations #
+
+Due to issues with dev this morning, this image has a broken /wsapi/cert_key
+But you should be able to exercise other aspects of the dialog and example RP / Primary
 
 Some aspects are "baked" into the VM intead of being puppetized
 
