@@ -2,8 +2,8 @@
 # vi: set ft=ruby :
 
 Vagrant::Config.run do |config|
-  config.vm.box = "browserid-scilinux-base0"
-  config.vm.box_url = "http://ozten.com/random/identity/devops/browserid-scilinux-base0.box"
+  config.vm.box = "browserid-scilinux-base1"
+  config.vm.box_url = "http://ozten.com/random/identity/devops/browserid-scilinux-base1.box"
 
   # Based on
   # config.vm.box_url = "http://download.frameos.org/sl6-64-chefclient-0.10.box"
