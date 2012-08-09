@@ -16,12 +16,7 @@ file { "/etc/motd":
   content => "Welcome to your Vagrant-built virtual machine! Managed by Puppet.\n"
 }
 
-package { "mysql-server": ensure => "present" }
-
-service { "mysqld":
-  ensure => "running",
-  enable => true
-}
+package { "mysql-server": ensure => "absent" }
 
 package { "git": ensure => "present" }
 
@@ -120,20 +115,8 @@ file {"/service/browserid-verifier/supervise":
   mode => "0755"
 }
 
-file {"/service/browserid-dbwriter": ensure => "directory" }
-
-file {"/service/browserid-dbwriter/run":
-  ensure => "file",
-  source => "/vagrant/puppet-webhead/files/daemontools/browserid-dbwriter/run",
-  owner => "root",
-  mode => "0755"
-}
-
-file {"/service/browserid-dbwriter/supervise":
-  ensure => "directory",
-  owner => "root",
-  mode => "0755"
-}
+# Our VM image is shared, cull
+file {"/service/browserid-dbwriter": ensure => "absent" }
 
 file {"/service/browserid-example-primary": ensure => "directory" }
 
