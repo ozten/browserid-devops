@@ -62,6 +62,34 @@ Outside the VM
     vagrant destroy
     vagrant up
 
+# Vagrant Tips
+If you get a warning that your Guest Additions are out of date, here 
+is how you fix it
+
+1)
+
+    vagrant halt
+
+2) Edit `Vagrantfile` and add
+
+    web_config.vm.boot_mode = :gui
+
+3) 
+
+    vagrant up
+
+Note that a VirtualBox window existing now. Focus that window then go:
+
+Menu > Devices > Install Guest Addtions
+
+    vagrant ssh
+    sudo mkdir /media/cdrom
+    sudo mount -t iso9660 /dev/cdrom /media/cdrom
+    sudo /media/cdrom/VBoxLinuxAdditions.run
+
+It's cool if this fails for some things... like OpenGL or whatever
+
+
 # Daemontools Tips
 
 You can detect a service keeps restarting and is hozed by
