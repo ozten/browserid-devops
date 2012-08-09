@@ -49,7 +49,7 @@ file {"/service/browserid-browserid": ensure => "directory" }
 # TODO reduce duplicate code with a define
 file {"/service/browserid-browserid/run":
   ensure => "file",
-  source => "/vagrant/puppet/files/daemontools/browserid-browserid/run",
+  source => "/vagrant/puppet-dbwriter/files/daemontools/browserid-browserid/run",
   owner => "root",
   mode => "0755"
 }
@@ -64,7 +64,7 @@ file {"/service/browserid-example": ensure => "directory" }
 
 file {"/service/browserid-example/run":
   ensure => "file",
-  source => "/vagrant/puppet/files/daemontools/browserid-example/run",
+  source => "/vagrant/puppet-dbwriter/files/daemontools/browserid-example/run",
   owner => "root",
   mode => "0755"
 }
@@ -79,7 +79,7 @@ file {"/service/browserid-keysigner": ensure => "directory" }
 
 file {"/service/browserid-keysigner/run":
   ensure => "file",
-  source => "/vagrant/puppet/files/daemontools/browserid-keysigner/run",
+  source => "/vagrant/puppet-dbwriter/files/daemontools/browserid-keysigner/run",
   owner => "root",
   mode => "0755"
 }
@@ -94,7 +94,7 @@ file {"/service/browserid-router": ensure => "directory" }
 
 file {"/service/browserid-router/run":
   ensure => "file",
-  source => "/vagrant/puppet/files/daemontools/browserid-router/run",
+  source => "/vagrant/puppet-dbwriter/files/daemontools/browserid-router/run",
   owner => "root",
   mode => "0755"
 }
@@ -109,7 +109,7 @@ file {"/service/browserid-verifier": ensure => "directory" }
 
 file {"/service/browserid-verifier/run":
   ensure => "file",
-  source => "/vagrant/puppet/files/daemontools/browserid-verifier/run",
+  source => "/vagrant/puppet-dbwriter/files/daemontools/browserid-verifier/run",
   owner => "root",
   mode => "0755"
 }
@@ -124,7 +124,7 @@ file {"/service/browserid-dbwriter": ensure => "directory" }
 
 file {"/service/browserid-dbwriter/run":
   ensure => "file",
-  source => "/vagrant/puppet/files/daemontools/browserid-dbwriter/run",
+  source => "/vagrant/puppet-dbwriter/files/daemontools/browserid-dbwriter/run",
   owner => "root",
   mode => "0755"
 }
@@ -139,7 +139,7 @@ file {"/service/browserid-example-primary": ensure => "directory" }
 
 file {"/service/browserid-example-primary/run":
   ensure => "file",
-  source => "/vagrant/puppet/files/daemontools/browserid-example-primary/run",
+  source => "/vagrant/puppet-dbwriter/files/daemontools/browserid-example-primary/run",
   owner => "root",
   mode => "0755"
 }
@@ -154,7 +154,7 @@ file {"/service/browserid-proxy": ensure => "directory" }
 
 file {"/service/browserid-proxy/run":
   ensure => "file",
-  source => "/vagrant/puppet/files/daemontools/browserid-proxy/run",
+  source => "/vagrant/puppet-dbwriter/files/daemontools/browserid-proxy/run",
   owner => "root",
   mode => "0755"
 }
@@ -169,7 +169,7 @@ file {"/service/browserid-static": ensure => "directory" }
 
 file {"/service/browserid-static/run":
   ensure => "file",
-  source => "/vagrant/puppet/files/daemontools/browserid-static/run",
+  source => "/vagrant/puppet-dbwriter/files/daemontools/browserid-static/run",
   owner => "root",
   mode => "0755"
 }
