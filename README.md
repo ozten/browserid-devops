@@ -43,6 +43,11 @@ If you want to tail the logs:
 
 ## Cut a new VM base image for others ##
 
+In the VM
+    sudo rm /etc/udev/rules.d/70-persistent-net.rules
+
+Outside the VM
+
     vagrant package --output browserid-scilinux-base0.box
     scp  browserid-scilinux-base0.box me@somewhere.han.dy:boxen/
     emacs Vagrantfile
