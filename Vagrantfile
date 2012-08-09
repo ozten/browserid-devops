@@ -30,10 +30,10 @@ Vagrant::Config.run do |config|
     web_config.vm.forward_port 10007, 10007
     web_config.vm.forward_port 10010, 10010
 
-    web_config.vm.share_folder "v-puppet", "/etc/puppet", "puppet"
+    web_config.vm.share_folder "v-puppet", "/etc/puppet", "puppet-webhead"
 
     web_config.vm.provision :puppet do |puppet|
-     puppet.manifests_path = "puppet/manifests"
+     puppet.manifests_path = "puppet-webhead/manifests"
      puppet.manifest_file  = "browserid.pp"
     end
   end
@@ -48,10 +48,10 @@ Vagrant::Config.run do |config|
     # DB Writer
     db_config.vm.forward_port 10004, 10004
 
-    db_config.vm.share_folder "v-puppet", "/etc/puppet", "db_puppet"
+    db_config.vm.share_folder "v-puppet", "/etc/puppet", "puppet-dbwriter"
 
     db_config.vm.provision :puppet do |puppet|
-     puppet.manifests_path = "db_puppet/manifests"
+     puppet.manifests_path = "puppet-dbwriter/manifests"
      puppet.manifest_file  = "browserid-db.pp"
     end
   end
