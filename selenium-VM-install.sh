@@ -4,14 +4,12 @@
 
 echo "*** Unfucking networking ***" > 2
 # TODO make this not necessary by fixing the base image
-rm -f install.log
-touch install.log
-sudo rm -rf /etc/udev/rules.d/70-persistent-net.rules > install.log
+sudo rm -rf /etc/udev/rules.d/70-persistent-net.rules
 echo "*** donezo ***" > 2
 
 echo "*** Provisioning Jenkins ***" > 2
 # here are instructions: https://wiki.jenkins-ci.org/display/JENKINS/Installing+Jenkins+on+Ubuntu
-wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key >> install.log | sudo apt-key add - >> install.log
+wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add -
 sudo sh -c 'echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/jenkins.list'
 sudo apt-get update
 sudo apt-get install -q -y jenkins
