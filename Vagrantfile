@@ -11,6 +11,18 @@
 
 Vagrant::Config.run do |config|
 
+  # selenium VM is an ubuntu GUI box with firefox installed
+  # it installs jenkins, 123done (for a local RP), and browserid (for
+  # the selenium tests inside the browserid repo).
+  config.vm.define :selenium do |sel|
+    sel.vm.box = "ubuntu-selenium0.box"
+    sel.vm.box_url = "http://ozten.com/random/identity/devops/ubuntu-selenium0.box"
+    sel.vm.boot_mode = :gui
+    sel.vm.network :hostonly, "192.168.33.13"
+    # shell script handles provisioning details
+    sel.vm.provision :shell, :inline => './selenium-VM-install.sh 1> selenium-VM-install.log'
+  end
+
   # webhead runs router and main browserid process in read mode only
   config.vm.define :webhead do |web_config|
     web_config.vm.box = "browserid-scilinux-web2"
