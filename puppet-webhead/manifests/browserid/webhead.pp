@@ -9,9 +9,5 @@ class browserid::webhead {
                  '/vagrant/puppet-webhead/files/etc/nginx/conf.d/idweb.conf'],
       before => Service["nginx"];
     }
-    file {'/etc/nginx/default.conf':
-      ensure => 'present',
-      source => '/vagrant/puppet-webhead/files/etc/nginx/default.conf'
-    }
     service {'nginx': ensure => 'running'}
 }
