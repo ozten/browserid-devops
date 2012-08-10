@@ -15,7 +15,10 @@ sudo apt-get update
 sudo apt-get install -q -y jenkins
 
 # also install the browserid job
+/etc/init.d/jenkins stop
 tar xzvf /vagrant/selenium/jobs.tar.gz /var/lib/jenkins/
+chown -R jenkins /var/lib/jenkins/jobs
+/etc/init.d/jenkins start
 echo "*** donezo ***" > 2
 
 # jenkins should now be running on localhost:8080 inside that VM.
