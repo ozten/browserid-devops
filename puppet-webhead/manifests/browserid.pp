@@ -162,3 +162,5 @@ file {"/service/browserid-static/supervise":
   owner => "root",
   mode => "0755"
 }
+
+include browserid::webhead
