@@ -1,8 +1,17 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+##
+## Set up
+##
+## 1. Nginx + Router + main read API (webhead)
+## 2. write API (dbwriter)
+## 3. keysigner/certifier (certifier)
+## 4. database (mysql)
+
 Vagrant::Config.run do |config|
 
+  # webhead runs router and main browserid process in read mode only
   config.vm.define :webhead do |web_config|
     web_config.vm.box = "browserid-scilinux-web2"
     web_config.vm.box_url = "http://ozten.com/random/identity/devops/browserid-scilinux-base2.box"
@@ -11,7 +20,7 @@ Vagrant::Config.run do |config|
     # config.vm.box_url = "http://download.frameos.org/sl6-64-chefclient-0.10.box"
 
     # Troubleshooting? use the GUI
-    web_config.vm.boot_mode = :gui
+    # web_config.vm.boot_mode = :gui
 
     web_config.vm.network :hostonly, "192.168.33.11"
 
@@ -43,7 +52,7 @@ Vagrant::Config.run do |config|
     db_config.vm.box_url = "http://ozten.com/random/identity/devops/browserid-scilinux-base2.box"
 
     db_config.vm.network :hostonly, "192.168.33.22"
-    db_config.vm.boot_mode = :gui
+    # db_config.vm.boot_mode = :gui
 
     # DB Writer
     db_config.vm.forward_port 10004, 10004
@@ -53,6 +62,20 @@ Vagrant::Config.run do |config|
     db_config.vm.provision :puppet do |puppet|
      puppet.manifests_path = "puppet-dbwriter/manifests"
      puppet.manifest_file  = "browserid-db.pp"
+    end
+  end
+
+  config.vm.define :mysql do |db_config|
+    db_config.vm.box = "browserid-scilinux-mysql2"
+    db_config.vm.box_url = "http://ozten.com/random/identity/devops/browserid-scilinux-base2.box"
+
+    db_config.vm.network :hostonly, "192.168.33.33"
+
+    db_config.vm.share_folder "v-puppet", "/etc/puppet", "puppet-mysql"
+
+    db_config.vm.provision :puppet do |puppet|
+     puppet.manifests_path = "puppet-mysql/manifests"
+     puppet.manifest_file  = "browserid-mysql.pp"
     end
   end
 end
