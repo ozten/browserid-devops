@@ -7,7 +7,7 @@ export PATH=/usr/bin:/usr/local/bin:$PATH
 # export NODE_EXTRA_CONFIG=/...
 export CONFIG_FILES="/home/browserid/browserid/config/local.json"
 export HOST=192.168.33.11
-export IP_ADDRESS=0.0.0.0
+export IP_ADDRESS=192.168.33.11
 export PORT=10010
 export PUBLIC_URL=http://192.168.33.11:10002
 

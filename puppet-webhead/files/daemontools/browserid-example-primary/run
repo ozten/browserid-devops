@@ -9,9 +9,9 @@ export CONFIG_FILES="/home/browserid/browserid/config/local.json"
 # So serve_example_primary.js has HOST then IP_ADDRESS bug in listen
 # but we don't need HOST, I don't think...
 # export HOST=localhost
-export IP_ADDRESS=0.0.0.0
+export IP_ADDRESS=192.168.33.11
 export PORT=10005
-export PUBLIC_URL=http://localhost:10002
+export PUBLIC_URL=http://192.168.33.11:10005
 
 cd /home/browserid/browserid/
 ulimit -n 8192

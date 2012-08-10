@@ -7,10 +7,11 @@ export PATH=/usr/bin:/usr/local/bin:$PATH
 # export NODE_EXTRA_CONFIG=/...
 export CONFIG_FILES="/home/browserid/browserid/config/local.json"
 export HOST=localhost
-export IP_ADDRESS=0.0.0.0
+export IP_ADDRESS=192.168.33.11
 export PORT=10001
-export PUBLIC_URL=http://localhost:10002
+export PUBLIC_URL=http://192.168.33.11:10002
+export VERIFIER_URL=http://192.168.33.11:10000/verify
 
 cd /home/browserid/browserid/
 ulimit -n 8192
-exec setuidgid browserid scripts/serve_example.js
+exec setuidgid browserid scripts/serve_example.js > /home/browserid/browserid/var/log/example.log
