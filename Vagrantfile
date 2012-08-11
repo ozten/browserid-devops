@@ -20,7 +20,7 @@ Vagrant::Config.run do |config|
     sel.vm.boot_mode = :gui
     sel.vm.network :hostonly, "192.168.33.13"
     # shell script handles provisioning details
-    sel.vm.provision :shell, :inline => '/vagrant/selenium-VM-install.sh 1> selenium-VM-install.log'
+    sel.vm.provision :shell, :inline => '/vagrant/selenium/selenium-VM-install.sh 1> selenium-VM-install.log'
   end
 
   # webhead runs router and main browserid process in read mode only
