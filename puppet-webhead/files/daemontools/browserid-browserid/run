@@ -7,7 +7,7 @@ export PATH=/usr/bin:/usr/local/bin:$PATH
 # export NODE_EXTRA_CONFIG=/...
 export CONFIG_FILES="/home/browserid/browserid/config/local.json,/vagrant/puppet-webhead/files/browserid/config/vagrant.json"
 export PORT=62700
-export IP_ADDRESS=192.168.33.11
+export IP_ADDRESS=127.0.0.1
 
 cd /home/browserid/browserid/
 ulimit -n 8192
