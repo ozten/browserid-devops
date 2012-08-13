@@ -15,6 +15,7 @@ Vagrant::Config.run do |config|
   # it installs jenkins, 123done (for a local RP), and browserid (for
   # the selenium tests inside the browserid repo).
   config.vm.define :selenium do |sel|
+    sel.vm.host_name = "selenium.intcluster.mozilla.com"
     sel.vm.box = "ubuntu-selenium0.box"
     sel.vm.box_url = "http://ozten.com/random/identity/devops/ubuntu-selenium0.box"
     sel.vm.boot_mode = :gui
@@ -25,6 +26,7 @@ Vagrant::Config.run do |config|
 
   # webhead runs router and main browserid process in read mode only
   config.vm.define :webhead do |web_config|
+    web_config.vm.host_name = "webhead.intcluster.mozilla.com"
     web_config.vm.box = "browserid-scilinux-web2"
     web_config.vm.box_url = "http://ozten.com/random/identity/devops/browserid-scilinux-base2.box"
 
@@ -60,6 +62,7 @@ Vagrant::Config.run do |config|
   end
 
   config.vm.define :dbwriter do |db_config|
+    db_config.vm.host_name = "swebhead.intcluster.mozilla.com"
     db_config.vm.box = "browserid-scilinux-db2"
     db_config.vm.box_url = "http://ozten.com/random/identity/devops/browserid-scilinux-base2.box"
 
@@ -78,6 +81,7 @@ Vagrant::Config.run do |config|
   end
 
   config.vm.define :mysql do |db_config|
+    db_config.vm.host_name = "mysql.intcluster.mozilla.com"
     db_config.vm.box = "browserid-scilinux-mysql2"
     db_config.vm.box_url = "http://ozten.com/random/identity/devops/browserid-scilinux-base2.box"
 
