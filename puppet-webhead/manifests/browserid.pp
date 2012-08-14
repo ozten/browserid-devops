@@ -1,3 +1,10 @@
+#TODO ver.txt was written by hand...
+
+#TODO /etc/hosts
+# 192.168.33.11 webhead.intcluster.mozilla.com static.webhead.intcluster.mozilla.com
+# 192.168.33.22 swebhead.intcluster.mozilla.com
+# 192.168.33.24 keysign.intcluster.mozilla.com
+
 group { "browserid":
   ensure => "present",
 }
@@ -16,12 +23,7 @@ file { "/etc/motd":
   content => "Welcome to your Vagrant-built virtual machine! Managed by Puppet.\n"
 }
 
-package { "mysql-server": ensure => "present" }
-
-service { "mysqld":
-  ensure => "running",
-  enable => true
-}
+package { "mysql-server": ensure => "absent" }
 
 package { "git": ensure => "present" }
 
@@ -75,21 +77,6 @@ file {"/service/browserid-example/supervise":
   mode => "0755"
 }
 
-file {"/service/browserid-keysigner": ensure => "directory" }
-
-file {"/service/browserid-keysigner/run":
-  ensure => "file",
-  source => "/vagrant/puppet-webhead/files/daemontools/browserid-keysigner/run",
-  owner => "root",
-  mode => "0755"
-}
-
-file {"/service/browserid-keysigner/supervise":
-  ensure => "directory",
-  owner => "root",
-  mode => "0755"
-}
-
 file {"/service/browserid-router": ensure => "directory" }
 
 file {"/service/browserid-router/run":
@@ -120,20 +107,7 @@ file {"/service/browserid-verifier/supervise":
   mode => "0755"
 }
 
-file {"/service/browserid-dbwriter": ensure => "directory" }
 
-file {"/service/browserid-dbwriter/run":
-  ensure => "file",
-  source => "/vagrant/puppet-webhead/files/daemontools/browserid-dbwriter/run",
-  owner => "root",
-  mode => "0755"
-}
-
-file {"/service/browserid-dbwriter/supervise":
-  ensure => "directory",
-  owner => "root",
-  mode => "0755"
-}
 
 file {"/service/browserid-example-primary": ensure => "directory" }
 
@@ -179,3 +153,11 @@ file {"/service/browserid-static/supervise":
   owner => "root",
   mode => "0755"
 }
+
+# Our VM image is shared, cull
+file {"/service/browserid-dbwriter": ensure => "absent", force => true }
+file {"/service/browserid-keysigner": ensure => "absent", force => true }
+
+include browserid::webhead
+
+# TODO exec /home/browserid/browserid/scripts/compress

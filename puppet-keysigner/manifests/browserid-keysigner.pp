@@ -16,13 +16,6 @@ file { "/etc/motd":
   content => "Welcome to your Vagrant-built virtual machine! Managed by Puppet.\n"
 }
 
-package { "mysql-server": ensure => "present" }
-
-service { "mysqld":
-  ensure => "running",
-  enable => true
-}
-
 package { "git": ensure => "present" }
 
 package { "wget": ensure => "present" }
@@ -43,25 +36,29 @@ exec { "browserid node dependencies installed":
   user => "browserid"
 }
 
-file {"/service/browserid-dbwriter": ensure => "directory" }
+# TODO puppet:///files/... instead of /vagarnt/files/...
+# TODO reduce duplicate code with a define
 
-file {"/service/browserid-dbwriter/run":
+file {"/service/browserid-keysigner": ensure => "directory" }
+
+file {"/service/browserid-keysigner/run":
   ensure => "file",
-  source => "/vagrant/puppet-dbwriter/files/daemontools/browserid-dbwriter/run",
+  source => "/vagrant/puppet-keysigner/files/daemontools/browserid-keysigner/run",
   owner => "root",
   mode => "0755"
 }
 
-file {"/service/browserid-dbwriter/supervise":
+file {"/service/browserid-keysigner/supervise":
   ensure => "directory",
   owner => "root",
   mode => "0755"
 }
 
-# no browserid processes, just dbwriter
+
+# no browserid processes, just keysigner
 file {"/service/browserid-browserid": ensure => "absent", force => true }
 file {"/service/browserid-example": ensure => "absent", force => true }
-file {"/service/browserid-keysigner": ensure => "absent", force => true }
+file {"/service/browserid-dbwriter": ensure => "absent", force => true }
 file {"/service/browserid-router": ensure => "absent", force => true }
 file {"/service/browserid-verifier": ensure => "absent", force => true }
 file {"/service/browserid-example-primary": ensure => "absent", force => true }

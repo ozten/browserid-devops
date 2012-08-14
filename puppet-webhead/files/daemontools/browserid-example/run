@@ -9,8 +9,8 @@ export CONFIG_FILES="/home/browserid/browserid/config/local.json"
 export HOST=localhost
 export IP_ADDRESS=192.168.33.11
 export PORT=10001
-export PUBLIC_URL=http://192.168.33.11:10002
-export VERIFIER_URL=http://192.168.33.11:10000/verify
+export PUBLIC_URL=http://192.168.33.11
+export VERIFIER_URL=http://192.168.33.11/verify
 
 cd /home/browserid/browserid/
 ulimit -n 8192
