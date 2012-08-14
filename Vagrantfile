@@ -16,8 +16,8 @@ Vagrant::Config.run do |config|
   # the selenium tests inside the browserid repo).
   config.vm.define :selenium do |sel|
     sel.vm.host_name = "selenium.intcluster.mozilla.com"
-    sel.vm.box = "ubuntu-selenium0.box"
-    sel.vm.box_url = "http://ozten.com/random/identity/devops/ubuntu-selenium0.box"
+    sel.vm.box = "browserid-scilinux-selenium3.box"
+    sel.vm.box_url = "http://ozten.com/random/identity/devops/browserid-scilinux-selenium3.box"
     sel.vm.boot_mode = :gui
     sel.vm.network :hostonly, "192.168.33.13"
     # shell script handles provisioning details
@@ -30,8 +30,8 @@ Vagrant::Config.run do |config|
   # webhead runs router and main browserid process in read mode only
   config.vm.define :webhead do |web_config|
     web_config.vm.host_name = "webhead.intcluster.mozilla.com"
-    web_config.vm.box = "browserid-scilinux-web2"
-    web_config.vm.box_url = "http://ozten.com/random/identity/devops/browserid-scilinux-base2.box"
+    web_config.vm.box = "browserid-scilinux-webhead3.box"
+    web_config.vm.box_url = "http://ozten.com/random/identity/devops/browserid-scilinux-webhead3.box"
 
     # Based on
     # config.vm.box_url = "http://download.frameos.org/sl6-64-chefclient-0.10.box"
@@ -51,8 +51,8 @@ Vagrant::Config.run do |config|
 
   config.vm.define :keysigner do |ks_config|
     ks_config.vm.host_name = "keysign.intcluster.mozilla.com"
-    ks_config.vm.box = "browserid-scilinux-db2"
-    ks_config.vm.box_url = "http://ozten.com/random/identity/devops/browserid-scilinux-base2.box"
+    ks_config.vm.box = "browserid-scilinux-keysigner3.box"
+    ks_config.vm.box_url = "http://ozten.com/random/identity/devops/browserid-scilinux-keysigner3.box"
 
     ks_config.vm.network :hostonly, "192.168.33.24"
     # ks_config.vm.boot_mode = :gui
@@ -68,8 +68,8 @@ Vagrant::Config.run do |config|
   # aka Secure Webhead
   config.vm.define :swebhead do |db_config|
     db_config.vm.host_name = "swebhead.intcluster.mozilla.com"
-    db_config.vm.box = "browserid-scilinux-db2"
-    db_config.vm.box_url = "http://ozten.com/random/identity/devops/browserid-scilinux-base2.box"
+    db_config.vm.box = "browserid-scilinux-swebhead3.box"
+    db_config.vm.box_url = "http://ozten.com/random/identity/devops/browserid-scilinux-swebhead3.box"
 
     db_config.vm.network :hostonly, "192.168.33.22"
     # db_config.vm.boot_mode = :gui
@@ -88,8 +88,8 @@ Vagrant::Config.run do |config|
   # Represents the DB master
   config.vm.define :mysql do |db_config|
     db_config.vm.host_name = "mysql.intcluster.mozilla.com"
-    db_config.vm.box = "browserid-scilinux-mysql2"
-    db_config.vm.box_url = "http://ozten.com/random/identity/devops/browserid-scilinux-base2.box"
+    db_config.vm.box = "browserid-scilinux-mysql3.box"
+    db_config.vm.box_url = "http://ozten.com/random/identity/devops/browserid-scilinux-mysql3.box"
 
     db_config.vm.network :hostonly, "192.168.33.33"
 
