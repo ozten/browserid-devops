@@ -23,6 +23,9 @@ service { "mysqld":
   enable => true
 }
 
+# TODO
+# ensure - GRANT ALL ON *.* TO root@192.168.33.22 IDENTIFIED BY '';
+
 package { "git": ensure => "present" }
 
 package { "wget": ensure => "present" }
