@@ -1,21 +1,3 @@
-# TODO validate that this is what Zeus does
-server {
-    listen 80;
-    server_name _;
-    rewrite ^(.*) https://webhead.intcluster.mozilla.com$1 permanent;
-}
-
-#TODO Remove server wrapping
-server {
-
-    # TODO Zeus does SSL, but we'll do in webhead nginx???
-    listen 443;
-    server_name webhead.intcluster.mozilla.com;
-
-    ssl on;
-    ssl_certificate /etc/pki/tls/certs/webhead.intcluster.mozilla.com.crt;
-    ssl_certificate_key /etc/pki/tls/private/webhead.intcluster.mozilla.com.key;
-
 # do not expose to public
 location /code_update {
     allow 127.0.0.0/8;
@@ -59,7 +41,4 @@ location / {
     gzip_disable "MSIE [1-6]\.(?!.*SV1)";
     gzip_proxied any;
     gzip_types text/html application/javascript text/css application/x-font-ttf;
-}
-
-#TODO Remove
 }

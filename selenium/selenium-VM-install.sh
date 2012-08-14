@@ -46,7 +46,7 @@ wget -q github.com/mozilla/123done/tarball/local-RP # TODO just until the local 
 tar xzvf local-RP
 cd mozilla-123done-*
 npm install 1>123done.log 2>&1
-export PERSONA_URL="http://192.168.33.11"
+export PERSONA_URL="https://webhead.intcluster.mozilla.com"
 export PORT="8765" # 8080 is the default and conflicts with Jenkins
 echo "*** donezo ***" 1>&2
 

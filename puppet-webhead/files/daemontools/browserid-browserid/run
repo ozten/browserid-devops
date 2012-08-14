@@ -3,12 +3,11 @@
 exec 2>&1 # fix stderr logging for daemontools
 
 export PATH=/usr/bin:/usr/local/bin:$PATH
-# export NODE_ENV=production
+export NODE_ENV=production
 # export NODE_EXTRA_CONFIG=/...
-export CONFIG_FILES="/home/browserid/browserid/config/local.json,/vagrant/puppet-webhead/files/browserid/config/vagrant.json"
-export PORT=62700
-export IP_ADDRESS=127.0.0.1
+export CONFIG_FILES="/home/browserid/browserid/config/production.json,/vagrant/puppet-webhead/files/browserid/config/vagrant.json"
+export BROWSERID_FAKE_VERIFICATION=1
 
 cd /home/browserid/browserid/
 ulimit -n 8192
-exec setuidgid browserid bin/browserid
+exec setuidgid browserid bin/browserid >> /home/browserid/browserid/var/log/browserid.log
