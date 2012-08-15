@@ -36,5 +36,5 @@
   "static_url": "https://static.webhead.intcluster.mozilla.com",
   "browserid_url": "http://127.0.0.1:62700",
   "keysigner_url": "http://keysign.intcluster.mozilla.com",
-  "dbwriter_url": "http://dbwriter.intcluster.mozilla.com"
+  "dbwriter_url": "http://swebhead.intcluster.mozilla.com"
 }
