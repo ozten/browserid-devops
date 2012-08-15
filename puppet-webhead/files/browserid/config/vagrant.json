@@ -6,6 +6,14 @@
     "host": "127.0.0.1"
   },
 
+  "database": {
+    "driver": "mysql",
+    "user": "root",
+    "password": "",
+    "name": "browserid",
+    "host": "192.168.33.33",
+    "create_schema": false
+  },
 
   "use_minified_resources": true,
 
@@ -35,5 +43,5 @@
   "verifier_url": "https://browserid.org",
   "browserid_url": "http://127.0.0.1:62700",
   "keysigner_url": "http://keysign.intcluster.mozilla.com",
-  "dbwriter_url": "http://dbwriter.intcluster.mozilla.com"
+  "dbwriter_url": "http://swebhead.intcluster.mozilla.com"
 }

@@ -9,6 +9,6 @@ export CONFIG_FILES="/home/browserid/browserid/config/local.json,/vagrant/puppet
 
 cd /home/browserid/browserid/
 ulimit -n 8192
-exec setuidgid browserid bin/dbwriter >> /home/browserid/browserid/dbwriter.log
+exec setuidgid browserid bin/dbwriter >> /home/browserid/browserid/var/log/dbwriter.log
 
 sleep 5
