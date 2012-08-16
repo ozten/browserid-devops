@@ -30,8 +30,8 @@ The `test` server will see the `router` as login.vmcluster.mozilla.com.
 
 `$environment` is set to `production`
 
-In the future, we should probably have it set to `vmcluster` or something to
-keep our manifests managable between `stage`, `vmcluster`, and `production`.
+In the future, we should probably have it set to `intcluster` or something to
+keep our manifests managable between `stage`, `intcluster`, and `production`.
 
 == Testing ==
 === Email ===
@@ -44,3 +44,14 @@ How to verify a user...
 * https://webhead.intcluster.mozilla.com/fake_verification?email=foo@bar.com
 * Copy token, way we got gEFXJoL8FxytQvFlnWSNbuteDesNlPfDWs9QWI151QcStP5E
 * https://webhead.intcluster.mozilla.com/verify_email_address?token=gEFXJoL8FxytQvFlnWSNbuteDesNlPfDWs9QWI151QcStP5E
+
+== Limitations ==
+
+The following subsystems are absent from the intcluster:
+
+* Zeus Load Balancer
+* Watchmouse
+* RSBAC
+* logstash
+* Nagios
+* Pencil
