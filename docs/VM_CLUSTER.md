@@ -32,3 +32,15 @@ The `test` server will see the `router` as login.vmcluster.mozilla.com.
 
 In the future, we should probably have it set to `vmcluster` or something to
 keep our manifests managable between `stage`, `vmcluster`, and `production`.
+
+== Testing ==
+=== Email ===
+
+Currently intcluster **does not** send email. It runs with
+`BROWSERID_FAKE_VERIFICATION` turned on.
+
+How to verify a user...
+* Go through normal signup flow (we'll use foo@bar.com)
+* https://webhead.intcluster.mozilla.com/fake_verification?email=foo@bar.com
+* Copy token, way we got gEFXJoL8FxytQvFlnWSNbuteDesNlPfDWs9QWI151QcStP5E
+* https://webhead.intcluster.mozilla.com/verify_email_address?token=gEFXJoL8FxytQvFlnWSNbuteDesNlPfDWs9QWI151QcStP5E

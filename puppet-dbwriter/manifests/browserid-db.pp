@@ -16,12 +16,7 @@ file { "/etc/motd":
   content => "Welcome to your Vagrant-built virtual machine! Managed by Puppet.\n"
 }
 
-package { "mysql-server": ensure => "present" }
-
-service { "mysqld":
-  ensure => "running",
-  enable => true
-}
+package { "mysql-server": ensure => "absent" }
 
 package { "git": ensure => "present" }
 
@@ -61,11 +56,11 @@ file {"/service/browserid-dbwriter/supervise":
 # no browserid processes, just dbwriter
 file {"/service/browserid-browserid": ensure => "absent", force => true }
 file {"/service/browserid-example": ensure => "absent", force => true }
-file {"/service/browserid-keysigner": ensure => "absent", force => true }
+file {"/service/browserid-example-primary": ensure => "absent", force => true }
 file {"/service/browserid-router": ensure => "absent", force => true }
 file {"/service/browserid-verifier": ensure => "absent", force => true }
-file {"/service/browserid-example-primary": ensure => "absent", force => true }
 file {"/service/browserid-proxy": ensure => "absent", force => true }
 file {"/service/browserid-static": ensure => "absent", force => true }
+file {"/service/browserid-keysigner": ensure => "absent", force => true }
 
 include browserid::webhead
