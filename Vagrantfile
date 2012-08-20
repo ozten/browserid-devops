@@ -88,8 +88,8 @@ Vagrant::Config.run do |config|
   # Represents the DB master
   config.vm.define :mysql do |db_config|
     db_config.vm.host_name = "mysql.intcluster.mozilla.com"
-    db_config.vm.box = "browserid-scilinux-mysql3.box"
-    db_config.vm.box_url = "http://ozten.com/random/identity/devops/browserid-scilinux-mysql3.box"
+    db_config.vm.box = "browserid-scilinux-mysql4.box"
+    db_config.vm.box_url = "http://ozten.com/random/identity/devops/browserid-scilinux-mysql4.box"
 
     db_config.vm.network :hostonly, "192.168.33.33"
 
