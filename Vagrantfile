@@ -60,24 +60,22 @@ Vagrant::Config.run do |config|
 
   config.vm.define :keysigner do |ks_config|
     ks_config.vm.host_name = "keysign.intcluster.mozilla.com"
-    ks_config.vm.box = "browserid-scilinux-keysigner3.box"
-    ks_config.vm.box_url = "http://ozten.com/random/identity/devops/browserid-scilinux-keysigner3.box"
+    ks_config.vm.box = "browserid-scilinux-keysigner4.box"
+    ks_config.vm.box_url = "http://ozten.com/random/identity/devops/browserid-scilinux-keysigner4.box"
 
     ks_config.vm.network :hostonly, "192.168.33.24"
 
-    ks_config.vm.share_folder "v-puppet", "/etc/puppet", "puppet-keysigner"
-
     ks_config.vm.provision :puppet do |puppet|
-     puppet.manifests_path = "puppet-keysigner/manifests"
-     puppet.manifest_file  = "browserid-keysigner.pp"
+     puppet.manifests_path = "puppet/manifests"
+     puppet.manifest_file  = "browserid/keysigner.pp"
     end
   end
 
   # aka Secure Webhead
   config.vm.define :swebhead do |db_config|
     db_config.vm.host_name = "swebhead.intcluster.mozilla.com"
-    db_config.vm.box = "browserid-scilinux-swebhead3.box"
-    db_config.vm.box_url = "http://ozten.com/random/identity/devops/browserid-scilinux-swebhead3.box"
+    db_config.vm.box = "browserid-scilinux-swebhead4.box"
+    db_config.vm.box_url = "http://ozten.com/random/identity/devops/browserid-scilinux-swebhead4.box"
 
     db_config.vm.network :hostonly, "192.168.33.22"
     # db_config.vm.boot_mode = :gui
