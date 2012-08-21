@@ -98,8 +98,8 @@ Vagrant::Config.run do |config|
     db_config.vm.network :hostonly, "192.168.33.33"
 
     db_config.vm.provision :puppet do |puppet|
-     puppet.manifests_path = "puppet-mysql/manifests"
-     puppet.manifest_file  = "browserid-mysql.pp"
+     puppet.manifests_path = "puppet/manifests"
+     puppet.manifest_file  = "browserid/mysql.pp"
     end
   end
 end
