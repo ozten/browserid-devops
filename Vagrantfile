@@ -48,9 +48,6 @@ Vagrant::Config.run do |config|
     # Based on
     # config.vm.box_url = "http://download.frameos.org/sl6-64-chefclient-0.10.box"
 
-    # Troubleshooting? use the GUI
-    # web_config.vm.boot_mode = :gui
-
     web_config.vm.network :hostonly, "192.168.33.11"
 
     web_config.vm.share_folder "v-puppet", "/etc/puppet", "puppet"
@@ -67,7 +64,6 @@ Vagrant::Config.run do |config|
     ks_config.vm.box_url = "http://ozten.com/random/identity/devops/browserid-scilinux-keysigner3.box"
 
     ks_config.vm.network :hostonly, "192.168.33.24"
-    # ks_config.vm.boot_mode = :gui
 
     ks_config.vm.share_folder "v-puppet", "/etc/puppet", "puppet-keysigner"
 
@@ -89,11 +85,9 @@ Vagrant::Config.run do |config|
     # DB Writer
     db_config.vm.forward_port 10004, 10004
 
-    db_config.vm.share_folder "v-puppet", "/etc/puppet", "puppet-dbwriter"
-
     db_config.vm.provision :puppet do |puppet|
-     puppet.manifests_path = "puppet-dbwriter/manifests"
-     puppet.manifest_file  = "browserid-db.pp"
+     puppet.manifests_path = "puppet/manifests"
+     puppet.manifest_file  = "browserid/swebhead.pp"
     end
   end
 
@@ -104,8 +98,6 @@ Vagrant::Config.run do |config|
     db_config.vm.box_url = "http://ozten.com/random/identity/devops/browserid-scilinux-mysql3.box"
 
     db_config.vm.network :hostonly, "192.168.33.33"
-
-    db_config.vm.share_folder "v-puppet", "/etc/puppet", "puppet-mysql"
 
     db_config.vm.provision :puppet do |puppet|
      puppet.manifests_path = "puppet-mysql/manifests"

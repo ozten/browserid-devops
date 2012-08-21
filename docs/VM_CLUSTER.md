@@ -7,6 +7,12 @@ service in production like configuration.
 The main dependency is a working Vagrant setup. This can be an epic journey, so
 check out [these steps](https://id.etherpad.mozilla.org/vagrant-browserid).
 
+## Setup ##
+
+    cp puppet/secrets/browserid/swebhead/socketlabs.json-dist puppet/secrets/browserid/swebhead/socketlabs.json
+    emacs puppet/secrets/browserid/swebhead/socketlabs.json
+    # put in your socketlabs account info
+
 ## Usage ##
 
     vagrant up
@@ -20,9 +26,9 @@ https://webhead.intcluster.mozilla.com
 ** browserid (port 62700) (was 10007)
 ** static (https://static.webhead.intcluster.mozilla.com)
 ** verifier (port 62800) (was 10000)
-* 192.168.33.22 dbwriter
+* 192.168.33.22 dbwriter (swebhead) (sends email)
 * 192.168.33.23 mysql - Database Server, no BrowserID codebase
-* 192.168.33.24 keysigner (port 62700) was (10003)
+* 192.168.33.24 keysigner (port 62700) was (10003) (has only copy of private key)
 
 The `test` server will see the `router` as login.vmcluster.mozilla.com.
 

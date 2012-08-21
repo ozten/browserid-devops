@@ -1,6 +1,91 @@
 class browserid::webhead {
     include browserid::setup
 
+    file {"/service/browserid-browserid": ensure => "directory" }
+
+    # TODO puppet:///files/... instead of /vagarnt/files/...
+    # TODO reduce duplicate code with a define
+    file {"/service/browserid-browserid/run":
+      ensure => "file",
+      source => "/vagrant/puppet/files/daemontools/browserid-browserid/run",
+      owner => "root",
+      mode => "0755"
+    }
+
+    file {"/service/browserid-browserid/supervise":
+      ensure => "directory",
+      owner => "root",
+      mode => "0755"
+    }
+
+    file {"/service/browserid-router": ensure => "directory" }
+
+    file {"/service/browserid-router/run":
+      ensure => "file",
+      source => "/vagrant/puppet/files/daemontools/browserid-router/run",
+      owner => "root",
+      mode => "0755"
+    }
+
+    file {"/service/browserid-router/supervise":
+      ensure => "directory",
+      owner => "root",
+      mode => "0755"
+    }
+
+    file {"/service/browserid-verifier": ensure => "directory" }
+
+    file {"/service/browserid-verifier/run":
+      ensure => "file",
+      source => "/vagrant/puppet/files/daemontools/browserid-verifier/run",
+      owner => "root",
+      mode => "0755"
+    }
+
+    file {"/service/browserid-verifier/supervise":
+      ensure => "directory",
+      owner => "root",
+      mode => "0755"
+    }
+
+    file {"/service/browserid-proxy": ensure => "directory" }
+
+    file {"/service/browserid-proxy/run":
+      ensure => "file",
+      source => "/vagrant/puppet/files/daemontools/browserid-proxy/run",
+      owner => "root",
+      mode => "0755"
+    }
+
+    file {"/service/browserid-proxy/supervise":
+      ensure => "directory",
+      owner => "root",
+      mode => "0755"
+    }
+
+    file {"/service/browserid-static": ensure => "directory" }
+
+    file {"/service/browserid-static/run":
+      ensure => "file",
+      source => "/vagrant/puppet/files/daemontools/browserid-static/run",
+      owner => "root",
+      mode => "0755"
+    }
+
+    file {"/service/browserid-static/supervise":
+      ensure => "directory",
+      owner => "root",
+      mode => "0755"
+    }
+
+    # Our VM image is shared, cull
+    file {"/service/browserid-dbwriter": ensure => "absent", force => true }
+    file {"/service/browserid-keysigner": ensure => "absent", force => true }
+    file {"/service/browserid-example": ensure => "absent", force => true }
+    file {"/service/browserid-example-primary": ensure => "absent", force => true }
+
+    # TODO exec /opt/browserid/browserid/scripts/compress
+
     package { 'nginx': ensure => 'present' }
     # TODO /etc/nginx/conf.d doesn't work as idweb.conf is a partial
     # config... Edited idweb.conf to be a standalone file and
@@ -14,6 +99,27 @@ class browserid::webhead {
     service {'nginx': ensure => 'running'}
 
     file {
+        # How is log done in real configs?
+        "/var/browserid/log/browserid.log":
+            ensure => file,
+            mode   => 0660,
+            owner  => "root",
+            group  => "browserid";
+        "/var/browserid/log/verifier.log":
+            ensure => file,
+            mode   => 0660,
+            owner  => "root",
+            group  => "browserid";
+        "/var/browserid/log/static.log":
+            ensure => file,
+            mode   => 0660,
+            owner  => "root",
+            group  => "browserid";
+        "/var/browserid/log/router.log":
+            ensure => file,
+            mode   => 0660,
+            owner  => "root",
+            group  => "browserid";
         "/opt/browserid/config/production.json":
             ensure  => file,
             mode    => 0644,
