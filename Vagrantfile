@@ -41,11 +41,11 @@ Vagrant::Config.run do |config|
 
     web_config.vm.network :hostonly, "192.168.33.11"
 
-    web_config.vm.share_folder "v-puppet", "/etc/puppet", "puppet-webhead"
+    web_config.vm.share_folder "v-puppet", "/etc/puppet", "puppet"
 
     web_config.vm.provision :puppet do |puppet|
-     puppet.manifests_path = "puppet-webhead/manifests"
-     puppet.manifest_file  = "browserid.pp"
+     puppet.manifests_path = "puppet/manifests"
+     puppet.manifest_file  = "browserid/webhead.pp"
     end
   end
 
