@@ -25,13 +25,25 @@ Vagrant::Config.run do |config|
     sel.vm.provision :shell, :inline => '/vagrant/selenium/selenium-VM-install.sh 1> selenium-VM-install.log'
   end
 
+  config.vm.define :admin do |admin_config|
+    # Build rpms and push out to boxes, hosts monitoring, etc
+    admin_config.vm.host_name = "admin.intcluster.mozilla.com"
+    admin_config.vm.box = "browserid-scilinux-admin4.box"
+    admin_config.vm.box_url = "http://ozten.com/random/identity/devops/browserid-scilinux-admin4.box"
 
+    admin_config.vm.network :hostonly, "192.168.33.20"
+
+    admin_config.vm.provision :puppet do |puppet|
+     puppet.manifests_path = "puppet/manifests"
+     puppet.manifest_file  = "browserid/admin.pp"
+    end
+  end
 
   # webhead runs router and main browserid process in read mode only
   config.vm.define :webhead do |web_config|
     web_config.vm.host_name = "webhead.intcluster.mozilla.com"
-    web_config.vm.box = "browserid-scilinux-webhead3.box"
-    web_config.vm.box_url = "http://ozten.com/random/identity/devops/browserid-scilinux-webhead3.box"
+    web_config.vm.box = "browserid-scilinux-webhead4.box"
+    web_config.vm.box_url = "http://ozten.com/random/identity/devops/browserid-scilinux-webhead4.box"
 
     # Based on
     # config.vm.box_url = "http://download.frameos.org/sl6-64-chefclient-0.10.box"

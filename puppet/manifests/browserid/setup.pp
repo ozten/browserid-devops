@@ -81,21 +81,6 @@ class browserid::setup {
       mode => "0755"
     }
 
-    file {"/service/browserid-example": ensure => "directory" }
-
-    file {"/service/browserid-example/run":
-      ensure => "file",
-      source => "/vagrant/puppet/files/daemontools/browserid-example/run",
-      owner => "root",
-      mode => "0755"
-    }
-
-    file {"/service/browserid-example/supervise":
-      ensure => "directory",
-      owner => "root",
-      mode => "0755"
-    }
-
     file {"/service/browserid-router": ensure => "directory" }
 
     file {"/service/browserid-router/run":
@@ -121,23 +106,6 @@ class browserid::setup {
     }
 
     file {"/service/browserid-verifier/supervise":
-      ensure => "directory",
-      owner => "root",
-      mode => "0755"
-    }
-
-
-
-    file {"/service/browserid-example-primary": ensure => "directory" }
-
-    file {"/service/browserid-example-primary/run":
-      ensure => "file",
-      source => "/vagrant/puppet/files/daemontools/browserid-example-primary/run",
-      owner => "root",
-      mode => "0755"
-    }
-
-    file {"/service/browserid-example-primary/supervise":
       ensure => "directory",
       owner => "root",
       mode => "0755"
@@ -176,6 +144,8 @@ class browserid::setup {
     # Our VM image is shared, cull
     file {"/service/browserid-dbwriter": ensure => "absent", force => true }
     file {"/service/browserid-keysigner": ensure => "absent", force => true }
+    file {"/service/browserid-example": ensure => "absent", force => true }
+    file {"/service/browserid-example-primary": ensure => "absent", force => true }
 
     # TODO exec /opt/browserid/browserid/scripts/compress
 }
