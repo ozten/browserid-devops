@@ -168,14 +168,14 @@ class browserid::webhead {
             mode   => 0644,
             owner  => "root",
             group  => "root",
-            source => "/vagrant/puppet/files/etc/pki/tls/certs/webhead.intcluster.mozilla.com.crt";
+            source => "/vagrant/puppet/secrets/etc/pki/tls/certs/webhead.intcluster.mozilla.com.crt";
 
         "/etc/pki/tls/private/webhead.intcluster.mozilla.com.key":
             ensure => file,
             mode   => 0600,
             owner  => "root",
             group  => "root",
-            source => "/vagrant/puppet/files/etc/pki/tls/private/webhead.intcluster.mozilla.com.key";
+            source => "/vagrant/puppet/secrets/etc/pki/tls/private/webhead.intcluster.mozilla.com.key";
 
         # Allow the metrics process to pick up logs.
         #"/opt/bid_metrics/.ssh/authorized_keys":
