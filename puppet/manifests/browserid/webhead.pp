@@ -128,6 +128,7 @@ class browserid::webhead {
             #require => Class["browserid::package"],
             #content => template("browserid/production.json.$environment");
             source => '/vagrant/puppet/files/browserid/config/intcluster.json';
+
         #"/opt/browserid/config/webhead.json":
         #    ensure  => file,
         #    mode    => 0644,
@@ -138,10 +139,11 @@ class browserid::webhead {
         #"/etc/nginx/conf.d/idweb.conf":
         #    ensure => file,
         #    source => [
-    #"puppet:///files/etc/nginx/conf.d/idweb.conf.$environment",
-    #"puppet:///files/etc/nginx/conf.d/idweb.conf",
-     #       ],
-     #       before => Service["nginx"];
+        #"puppet:///files/etc/nginx/conf.d/idweb.conf.$environment",
+        #"puppet:///files/etc/nginx/conf.d/idweb.conf",
+        #       ],
+        #       before => Service["nginx"];
+
         "/var/browserid/browserid_cookie.sekret":
             ensure => file,
             mode   => 0640,

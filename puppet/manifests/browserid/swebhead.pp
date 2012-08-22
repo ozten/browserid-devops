@@ -53,7 +53,6 @@ class browserid::swebhead {
             group  => "browserid",
             #source => "puppet:///modules/browserid/root.cert.${browserid::setup::bid_env}";
             source => "/vagrant/puppet/secrets/browserid/root.cert";
-
         # The private key should only exist on the signers.
         "/var/browserid/root.secretkey":
             ensure => absent;

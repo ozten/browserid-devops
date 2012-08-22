@@ -59,9 +59,6 @@ class browserid::keysigner {
     file {"/service/browserid-proxy": ensure => "absent", force => true }
     file {"/service/browserid-static": ensure => "absent", force => true }
 
-    # TODO make this a define instead of a class so that source can be keysignerweb.conf
-    # this file duplicates one under puppet-webhead
-
     package { 'nginx': ensure => 'present' }
     # TODO /etc/nginx/conf.d doesn't work as idweb.conf is a partial
     file {'/etc/nginx/conf.d/default.conf':
