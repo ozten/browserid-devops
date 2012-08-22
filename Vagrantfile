@@ -25,51 +25,57 @@ Vagrant::Config.run do |config|
     sel.vm.provision :shell, :inline => '/vagrant/selenium/selenium-VM-install.sh 1> selenium-VM-install.log'
   end
 
+  config.vm.define :admin do |admin_config|
+    # Build rpms and push out to boxes, hosts monitoring, etc
+    admin_config.vm.host_name = "admin.intcluster.mozilla.com"
+    admin_config.vm.box = "browserid-scilinux-admin4.box"
+    admin_config.vm.box_url = "http://ozten.com/random/identity/devops/browserid-scilinux-admin4.box"
 
+    admin_config.vm.network :hostonly, "192.168.33.20"
+
+    admin_config.vm.provision :puppet do |puppet|
+     puppet.manifests_path = "puppet/manifests"
+     puppet.manifest_file  = "browserid/admin.pp"
+    end
+  end
 
   # webhead runs router and main browserid process in read mode only
   config.vm.define :webhead do |web_config|
     web_config.vm.host_name = "webhead.intcluster.mozilla.com"
-    web_config.vm.box = "browserid-scilinux-webhead3.box"
-    web_config.vm.box_url = "http://ozten.com/random/identity/devops/browserid-scilinux-webhead3.box"
+    web_config.vm.box = "browserid-scilinux-webhead4.box"
+    web_config.vm.box_url = "http://ozten.com/random/identity/devops/browserid-scilinux-webhead4.box"
 
     # Based on
     # config.vm.box_url = "http://download.frameos.org/sl6-64-chefclient-0.10.box"
 
-    # Troubleshooting? use the GUI
-    # web_config.vm.boot_mode = :gui
-
     web_config.vm.network :hostonly, "192.168.33.11"
 
-    web_config.vm.share_folder "v-puppet", "/etc/puppet", "puppet-webhead"
+    web_config.vm.share_folder "v-puppet", "/etc/puppet", "puppet"
 
     web_config.vm.provision :puppet do |puppet|
-     puppet.manifests_path = "puppet-webhead/manifests"
-     puppet.manifest_file  = "browserid.pp"
+     puppet.manifests_path = "puppet/manifests"
+     puppet.manifest_file  = "browserid/webhead.pp"
     end
   end
 
   config.vm.define :keysigner do |ks_config|
     ks_config.vm.host_name = "keysign.intcluster.mozilla.com"
-    ks_config.vm.box = "browserid-scilinux-keysigner3.box"
-    ks_config.vm.box_url = "http://ozten.com/random/identity/devops/browserid-scilinux-keysigner3.box"
+    ks_config.vm.box = "browserid-scilinux-keysigner4.box"
+    ks_config.vm.box_url = "http://ozten.com/random/identity/devops/browserid-scilinux-keysigner4.box"
 
     ks_config.vm.network :hostonly, "192.168.33.24"
-    # ks_config.vm.boot_mode = :gui
-
-    ks_config.vm.share_folder "v-puppet", "/etc/puppet", "puppet-keysigner"
 
     ks_config.vm.provision :puppet do |puppet|
-     puppet.manifests_path = "puppet-keysigner/manifests"
-     puppet.manifest_file  = "browserid-keysigner.pp"
+     puppet.manifests_path = "puppet/manifests"
+     puppet.manifest_file  = "browserid/keysigner.pp"
     end
   end
 
   # aka Secure Webhead
   config.vm.define :swebhead do |db_config|
     db_config.vm.host_name = "swebhead.intcluster.mozilla.com"
-    db_config.vm.box = "browserid-scilinux-swebhead3.box"
-    db_config.vm.box_url = "http://ozten.com/random/identity/devops/browserid-scilinux-swebhead3.box"
+    db_config.vm.box = "browserid-scilinux-swebhead4.box"
+    db_config.vm.box_url = "http://ozten.com/random/identity/devops/browserid-scilinux-swebhead4.box"
 
     db_config.vm.network :hostonly, "192.168.33.22"
     # db_config.vm.boot_mode = :gui
@@ -77,11 +83,9 @@ Vagrant::Config.run do |config|
     # DB Writer
     db_config.vm.forward_port 10004, 10004
 
-    db_config.vm.share_folder "v-puppet", "/etc/puppet", "puppet-dbwriter"
-
     db_config.vm.provision :puppet do |puppet|
-     puppet.manifests_path = "puppet-dbwriter/manifests"
-     puppet.manifest_file  = "browserid-db.pp"
+     puppet.manifests_path = "puppet/manifests"
+     puppet.manifest_file  = "browserid/swebhead.pp"
     end
   end
 
@@ -93,11 +97,9 @@ Vagrant::Config.run do |config|
 
     db_config.vm.network :hostonly, "192.168.33.33"
 
-    db_config.vm.share_folder "v-puppet", "/etc/puppet", "puppet-mysql"
-
     db_config.vm.provision :puppet do |puppet|
-     puppet.manifests_path = "puppet-mysql/manifests"
-     puppet.manifest_file  = "browserid-mysql.pp"
+     puppet.manifests_path = "puppet/manifests"
+     puppet.manifest_file  = "browserid/mysql.pp"
     end
   end
 end

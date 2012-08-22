@@ -5,6 +5,7 @@ exec 2>&1 # fix stderr logging for daemontools
 export PATH=/usr/bin:/usr/local/bin:$PATH
 export NODE_ENV=production
 # export NODE_EXTRA_CONFIG=/...
+
 export CONFIG_FILES="/vagrant/puppet/files/browserid/config/intcluster.json"
 export BROWSERID_FAKE_VERIFICATION=1
 
