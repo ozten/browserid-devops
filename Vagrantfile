@@ -58,6 +58,7 @@ Vagrant::Config.run do |config|
     admin_config.vm.box = "browserid-scilinux-admin4.box"
     admin_config.vm.box_url = "http://ozten.com/random/identity/devops/browserid-scilinux-admin4.box"
     admin_config.vm.network :hostonly, "192.168.33.20"
+    admin_config.vm.forward_port 80, 8333
     admin_config.vm.provision :puppet do |puppet|
      puppet.manifests_path = "puppet/manifests"
      puppet.manifest_file  = "browserid/admin.pp"
