@@ -30,6 +30,8 @@ class browserid::admin {
             ensure => present;
         "subversion":
             ensure => present;
+        "gettext":
+            ensure => present;
         "httpd":
             ensure => present;
         "php":
